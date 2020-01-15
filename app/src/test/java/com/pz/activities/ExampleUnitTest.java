@@ -1,4 +1,4 @@
-package com.example.projektpz;
+package com.pz.activities;
 
 import org.junit.Test;
 
