@@ -40,6 +40,7 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ShootingRangeDb.class, "ShootingRangeDb")
+                            .fallbackToDestructiveMigration()
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
@@ -58,11 +59,27 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 dao.deleteAllWeapons();
                 dao.deleteAllCalibers();
 
-                Caliber cal1 = new Caliber("44 mm");
-                Caliber cal2 = new Caliber("55 mm");
+                Caliber cal1 = new Caliber("9 mm");
+                Caliber cal2 = new Caliber("5,56 mm");
+                Caliber cal3 = new Caliber("7,65 mm");
+                Caliber cal4 = new Caliber(".22LR");
+                Caliber cal5 = new Caliber(".300");
+                Caliber cal6 = new Caliber(".45 ACP");
+                Caliber cal7 = new Caliber(".357 MAGNUM");
+                Caliber cal8 = new Caliber(".44 MAGNUM");
+                Caliber cal9 = new Caliber("7,62");
+
 
                 dao.insertCaliber(cal1);
                 dao.insertCaliber(cal2);
+                dao.insertCaliber(cal3);
+                dao.insertCaliber(cal4);
+                dao.insertCaliber(cal5);
+                dao.insertCaliber(cal6);
+                dao.insertCaliber(cal7);
+                dao.insertCaliber(cal8);
+                dao.insertCaliber(cal9);
+
                 //Weapon word = new Weapon("Hello",0,99);
                 //dao.insertWeapon(word);
             });

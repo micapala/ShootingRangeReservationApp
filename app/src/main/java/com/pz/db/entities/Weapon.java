@@ -24,8 +24,8 @@ public class Weapon
     public int fk_caliber_id;
 
     @ColumnInfo(name = "priceForShoot")
-    public int priceForShoot;
-    public Weapon(String weaponModel,int fk_caliber_id,int priceForShoot){
+    public double priceForShoot;
+    public Weapon(String weaponModel,int fk_caliber_id,double priceForShoot){
         this.weaponModel=weaponModel;
         this.fk_caliber_id = fk_caliber_id;
         this.priceForShoot = priceForShoot;

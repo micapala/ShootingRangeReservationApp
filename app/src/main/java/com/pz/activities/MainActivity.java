@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity  {
             String weapon_name = data.getStringExtra(NewWeaponActivity.WEAPON_NAME_REPLY);
             String caliber_id = data.getStringExtra(NewWeaponActivity.CALIBER_ID_REPLY);
             String price_for_shoot = data.getStringExtra(NewWeaponActivity.PRICE_FOR_SHOOT_REPLY);
-            Weapon word = new Weapon(weapon_name,Integer.parseInt(caliber_id),Integer.parseInt(price_for_shoot));
+            Weapon word = new Weapon(weapon_name,Integer.parseInt(caliber_id),Double.parseDouble(price_for_shoot));
             mWeaponViewModel.insertWeapon(word);
         } else {
             Toast.makeText(
