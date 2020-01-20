@@ -47,5 +47,10 @@ public class ShootingRangeRepository {
             mWeaponDAO.insertCaliber(caliber);
         });
     }
+    public void updateWeapon(int weapon_id,byte[] weapon_image,String weaponModel,int fk_caliber_id,int priceForShoot) {
+        ShootingRangeDb.databaseWriteExecutor.execute(() -> {
+            mWeaponDAO.updateWeapon(weapon_id,weapon_image,weaponModel,fk_caliber_id,priceForShoot);
+        });
+    }
 
 }

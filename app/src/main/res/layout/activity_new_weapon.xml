@@ -22,7 +22,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/add_image"
+        android:id="@+id/add_image_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Dodaj logo" />
@@ -71,11 +71,18 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="@string/button_save"
         android:textColor="@color/buttonLabel" />
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_delete_weapon"
+        android:visibility="invisible" />
 
 </LinearLayout>

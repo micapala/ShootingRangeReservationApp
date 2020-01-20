@@ -34,6 +34,19 @@ public interface WeaponDAO {
     @Query("SELECT * from caliber_t")
     LiveData<List<Caliber>> getAllCalibers();
 
+    @Query("SELECT * from weapon_t " +
+            "join caliber_t on weapon_t.fk_caliber_id = caliber_t.caliber_id")
+    LiveData<List<Weapon>> getAllWeapons();
+
     @Query("SELECT * from caliber_t where caliber_name = :name")
     LiveData<List<Caliber>> getCaliberByName(String name);
+
+    @Query("UPDATE weapon_t SET " +
+            "weaponModel = :weaponModel," +
+            "weapon_image = :weapon_image," +
+            "fk_caliber_id = :fk_caliber_id," +
+            "priceForShoot = :priceForShoot " +
+            "WHERE weapon_id = :weapon_id")
+    void updateWeapon(int weapon_id,byte[] weapon_image,String weaponModel,int fk_caliber_id,int priceForShoot);
+
 }

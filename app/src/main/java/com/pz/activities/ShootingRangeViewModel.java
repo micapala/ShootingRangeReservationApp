@@ -23,7 +23,12 @@ public class ShootingRangeViewModel extends AndroidViewModel {
         mAllWeapons = mRepository.getAllWeapons();
         mAllCalibers = mRepository.getAllCalibers();
     }
-    public LiveData<List<Weapon>> getAllWeapons() { return mAllWeapons; }
+    public LiveData<List<Weapon>> getAllWeapons() {
+        if(mAllWeapons==null){
+            mAllWeapons = mRepository.getAllWeapons();
+        }
+        return mAllWeapons;
+    }
 
     public LiveData<List<Caliber>> getAllCalibers() {
 
@@ -33,6 +38,11 @@ public class ShootingRangeViewModel extends AndroidViewModel {
 
         return mAllCalibers;
     }
+
+    public void updateWeapon(int weapon_id,byte[] weapon_image,String weaponModel,int fk_caliber_id,int priceForShoot){
+        mRepository.updateWeapon(weapon_id,weapon_image,weaponModel,fk_caliber_id,priceForShoot);
+    }
+
 
 
     public void insertWeapon(Weapon word) { mRepository.insertWeapon(word); }

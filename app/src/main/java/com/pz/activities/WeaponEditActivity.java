@@ -22,8 +22,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.pz.db.ShootingRangeDb;
 import com.pz.db.entities.Caliber;
+import com.pz.db.entities.Weapon;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -31,35 +31,59 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-public class NewWeaponActivity extends AppCompatActivity {
+public class WeaponEditActivity extends AppCompatActivity {
 
     public static final String WEAPON_NAME_REPLY = "com.example.android.weapon.name.REPLY";
     public static final String CALIBER_ID_REPLY = "com.example.android.weapon.caliber_id.REPLY";
     public static final String PRICE_FOR_SHOOT_REPLY = "com.example.android.weapon.price_for_shoot.REPLY";
     public static final String WEAPON_IMAGE_REPLY = "com.example.android.weapon.weapon_image.REPLY";
+    public static final String WEAPON_EDIT_REPLY = "com.example.android.weapon.weapon_edit.REPLY";
+    public static final String WEAPON_NEW_REPLY = "com.example.android.weapon.weapon_edit.REPLY";
     private static int RESULT_LOAD_IMAGE = 1;
 
     private EditText mEditWeaponName;
     private EditText mEditPriceForShoot;
     private Spinner mCaliberSpinner;
+    private ImageView mWeaponImage;
 
     private List<Caliber> caliberList;
 
-    Intent replyIntent = new Intent();
+    private List<Weapon> weaponList;
+
+    private Intent replyIntent = new Intent();
+    private Intent callerIntent = this.getIntent();
+
+    private ShootingRangeViewModel viewModel;
+
+    private boolean isEditActivity = false;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_new_weapon);
+        final Button button = findViewById(R.id.save_button);
+        Button add_image_button = findViewById(R.id.add_image_button);
+
+
+
+        viewModel = MainActivity.mWeaponViewModel;
+
         mEditWeaponName = findViewById(R.id.edit_weapon_name);
         mEditPriceForShoot = findViewById(R.id.edit_price_for_shoot);
+        mWeaponImage = findViewById(R.id.imageView);
+
         createCalibersSpinner();
 
-        final Button button = findViewById(R.id.button_save);
+        if(callerIntent!=null&&callerIntent.hasExtra("weapon_id")){
+            getWeaponAndSetFields(callerIntent.getIntExtra("weapon_id",-1));
+            isEditActivity = true;
+        }
 
 
-        Button fab = findViewById(R.id.add_image);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        add_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -74,6 +98,12 @@ public class NewWeaponActivity extends AppCompatActivity {
                         TextUtils.isEmpty((mEditPriceForShoot.getText()))) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
+                    if(isEditActivity) {
+                        replyIntent.putExtra(WEAPON_EDIT_REPLY,callerIntent.getIntExtra("weapon_id",-1));
+                    }
+                    else{
+                        replyIntent.putExtra(WEAPON_NEW_REPLY,"NEW");
+                    }
                     String weapon_name = mEditWeaponName.getText().toString();
                     String priceForShoot = mEditPriceForShoot.getText().toString();
                     String caliberPk = String.valueOf(getCaliber(mCaliberSpinner.getSelectedItem().toString()).caliberId);
@@ -87,6 +117,13 @@ public class NewWeaponActivity extends AppCompatActivity {
         });
     }
 
+    private void setFields(Weapon weapon){
+        mEditWeaponName.setText(weapon.weaponModel);
+        mEditPriceForShoot.setText(String.valueOf(weapon.priceForShoot));
+        mWeaponImage.setImageBitmap(BitmapFactory.decodeByteArray(weapon.weapon_image, 0, weapon.weapon_image.length));
+        replyIntent.putExtra(WEAPON_IMAGE_REPLY, weapon.weapon_image);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -96,15 +133,14 @@ public class NewWeaponActivity extends AppCompatActivity {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                ImageView image_view = findViewById(R.id.imageView);
-                image_view.setImageBitmap(selectedImage);
+                mWeaponImage.setImageBitmap(selectedImage);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 selectedImage.compress(Bitmap.CompressFormat.PNG, 100, bos);
                 byte[] imageByteArray = bos.toByteArray();
                 replyIntent.putExtra(WEAPON_IMAGE_REPLY, imageByteArray);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                Toast.makeText(NewWeaponActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                Toast.makeText(WeaponEditActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
 
         }
@@ -120,11 +156,16 @@ public class NewWeaponActivity extends AppCompatActivity {
         }
         return null;
     }
-
-
-
-
-
+    private void getWeaponAndSetFields(int weapon_id){
+        viewModel.getAllWeapons().observe(this, new Observer<List<Weapon>>() {
+            @Override
+            public void onChanged(@Nullable final List<Weapon> weaponsDb) {
+                for(Weapon weapon:weaponsDb){
+                    if(weapon.weaponPK == weapon_id) setFields(weapon);
+                }
+            }
+        });
+    }
 
     private void createCalibersSpinner(){
         List<String> caliberStrings = new LinkedList<>();
@@ -135,7 +176,7 @@ public class NewWeaponActivity extends AppCompatActivity {
         mCaliberSpinner = findViewById(R.id.select_caliber);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCaliberSpinner.setAdapter(adapter);
-        ShootingRangeDb.getInstance(this).weaponDAO().getAllCalibers().observe(this, new Observer<List<Caliber>>() {
+        viewModel.getAllCalibers().observe(this, new Observer<List<Caliber>>() {
             @Override
             public void onChanged(@Nullable final List<Caliber> calibers) {
                 for(Caliber cal:calibers){

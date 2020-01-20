@@ -14,7 +14,7 @@ import com.pz.db.entities.Weapon;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Weapon.class,Caliber.class}, version = 2, exportSchema = false)
+@Database(entities = {Weapon.class,Caliber.class}, version = 1, exportSchema = false)
 public abstract class ShootingRangeDb extends RoomDatabase {
     public abstract WeaponDAO weaponDAO();
 
@@ -41,7 +41,7 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ShootingRangeDb.class, "ShootingRangeDb")
                             .addCallback(sRoomDatabaseCallback)
-                            //.fallbackToDestructiveMigration()
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -56,7 +56,7 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
                 WeaponDAO dao = INSTANCE.weaponDAO();
-                dao.deleteAllWeapons();
+               // dao.deleteAllWeapons();
                 dao.deleteAllCalibers();
 
                 Caliber cal1 = new Caliber("44 mm");

@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="weapon_name_hint">Nazwa broni</string>
     <string name="button_save">Zapisz</string>
+    <string name="button_delete_weapon">Usuń broń</string>
     <string name="empty_not_saved">Broń nie zapisana bo nie wypełniono wszystkich pól.</string>
     <string name="add_weapon_title">Dodawanie nowej broni</string>
 </resources>

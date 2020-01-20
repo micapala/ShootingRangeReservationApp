@@ -16,31 +16,47 @@ import java.util.List;
 
 public class WeaponListAdapter extends RecyclerView.Adapter<WeaponListAdapter.WeaponViewHolder> {
 
-    class WeaponViewHolder extends RecyclerView.ViewHolder {
+
+
+    class WeaponViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         private final ImageView weaponImageView;
         private final TextView weaponNameView;
         private final TextView weaponCaliberView;
         private final TextView weaponPriceView;
+        private WeaponClickListener listener;
 
-        private WeaponViewHolder(View itemView) {
+        private WeaponViewHolder(View itemView,WeaponClickListener listener)  {
             super(itemView);
+            this.listener = listener;
             weaponImageView = itemView.findViewById(R.id.weaponImageView);
             weaponNameView = itemView.findViewById(R.id.weaponNameView);
             weaponCaliberView = itemView.findViewById(R.id.weaponCaliberView);
             weaponPriceView = itemView.findViewById(R.id.priceForShootView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (listener != null) {
+                listener.onWeaponClick(getAdapterPosition());
+            }
         }
     }
+    private WeaponClickListener listener;
 
     private final LayoutInflater mInflater;
     private List<Weapon> mWeapons; // Cached copy of words
     private List<Caliber> mCalibers;
 
-    WeaponListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+    public WeaponListAdapter(Context context,WeaponClickListener listener) {
+        this.mInflater = LayoutInflater.from(context);
+        this.listener = listener;
+    }
 
     @Override
     public WeaponViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
-        return new WeaponViewHolder(itemView);
+        return new WeaponViewHolder(itemView,listener);
     }
 
     @Override
