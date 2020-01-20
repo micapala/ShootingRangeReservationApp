@@ -10,4 +10,5 @@
     <string name="main_menu_reservations">Wyświetl rezerwacje</string>
     <string name="main_menu_calibers">Wyświetl kalibry</string>
     <string name="bro_kaliber_cena_strza">Broń: kaliber: cena/strzał:</string>
+    <string name="nazwa">Nazwa:</string>
 </resources>
