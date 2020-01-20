@@ -9,14 +9,18 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.pz.db.entities.Caliber;
+import com.pz.db.entities.Reservation;
 import com.pz.db.entities.Weapon;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Weapon.class,Caliber.class}, version = 3, exportSchema = false)
+@Database(entities = {Weapon.class,Caliber.class, Reservation.class}, version = 3, exportSchema = false)
 public abstract class ShootingRangeDb extends RoomDatabase {
     public abstract WeaponDAO weaponDAO();
+
+
+    public abstract ReservationDAO reservationDAO();
 
     private static volatile ShootingRangeDb INSTANCE;
 
@@ -40,9 +44,10 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ShootingRangeDb.class, "ShootingRangeDb")
+                            .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
                             .addCallback(sRoomDatabaseCallback)
-                            .fallbackToDestructiveMigration()
+                            //.fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -56,9 +61,11 @@ public abstract class ShootingRangeDb extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                WeaponDAO dao = INSTANCE.weaponDAO();
-               // dao.deleteAllWeapons();
-                dao.deleteAllCalibers();
+                WeaponDAO weaponDAO = INSTANCE.weaponDAO();
+                ReservationDAO reservationDAO = INSTANCE.reservationDAO();
+                reservationDAO.deleteAllReservations();
+               // wea.deleteAllWeapons();
+                weaponDAO.deleteAllCalibers();
 
                 Caliber cal1 = new Caliber("9 mm");
                 Caliber cal2 = new Caliber("5,56 mm");
@@ -71,18 +78,18 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 Caliber cal9 = new Caliber("7,62");
 
 
-                dao.insertCaliber(cal1);
-                dao.insertCaliber(cal2);
-                dao.insertCaliber(cal3);
-                dao.insertCaliber(cal4);
-                dao.insertCaliber(cal5);
-                dao.insertCaliber(cal6);
-                dao.insertCaliber(cal7);
-                dao.insertCaliber(cal8);
-                dao.insertCaliber(cal9);
+                weaponDAO.insertCaliber(cal1);
+                weaponDAO.insertCaliber(cal2);
+                weaponDAO.insertCaliber(cal3);
+                weaponDAO.insertCaliber(cal4);
+                weaponDAO.insertCaliber(cal5);
+                weaponDAO.insertCaliber(cal6);
+                weaponDAO.insertCaliber(cal7);
+                weaponDAO.insertCaliber(cal8);
+                weaponDAO.insertCaliber(cal9);
 
                 //Weapon word = new Weapon("Hello",0,99);
-                //dao.insertWeapon(word);
+                //wea.insertWeapon(word);
             });
         }
     };

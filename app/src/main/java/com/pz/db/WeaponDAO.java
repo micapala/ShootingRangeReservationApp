@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.pz.db.entities.Caliber;
+import com.pz.db.entities.Reservation;
 import com.pz.db.entities.Weapon;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public interface WeaponDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertCaliber(Caliber caliber);
+
 
     @Query("DELETE FROM caliber_t")
     void deleteAllCalibers();
@@ -36,6 +38,8 @@ public interface WeaponDAO {
 
     @Query("SELECT * from caliber_t")
     LiveData<List<Caliber>> getAllCalibers();
+
+
 
     @Query("SELECT * from weapon_t " +
             "join caliber_t on weapon_t.fk_caliber_id = caliber_t.caliber_id")

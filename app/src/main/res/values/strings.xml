@@ -9,4 +9,11 @@
     <string name="main_menu_weapons">Wyświetl bronie</string>
     <string name="main_menu_reservations">Wyświetl rezerwacje</string>
     <string name="main_menu_calibers">Wyświetl kalibry</string>
+    <string name="reservation_name">Imie</string>
+    <string name="reservation_surname">Nazwisko</string>
+    <string name="reservation_start">Data rozpoczęcia rezerwacji</string>
+    <string name="reservation_end">Data Zakończenia rezerwacji</string>
+    <string name="reservation_save_button">Zapisz rezerwacje</string>
+    <string name="reservation_numberOfHours">Liczba godzin</string>
+    <string name="reservation_hour">Godzina rezerwacji</string>
 </resources>

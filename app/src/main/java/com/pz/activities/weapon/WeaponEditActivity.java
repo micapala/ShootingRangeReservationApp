@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.applandeo.materialcalendarview.utils.ImageUtils;
 import com.pz.activities.R;
 import com.pz.ShootingRangeViewModel;
 import com.pz.db.entities.Caliber;
@@ -111,7 +112,8 @@ public class WeaponEditActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (TextUtils.isEmpty(mEditWeaponName.getText())||
                         TextUtils.isEmpty(mCaliberSpinner.getSelectedItem().toString())||
-                        TextUtils.isEmpty((mEditPriceForShoot.getText()))) {
+                        TextUtils.isEmpty((mEditPriceForShoot.getText()))||
+                        mWeaponImage.getDrawable()==null) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     if(isEditActivity) {
@@ -139,6 +141,18 @@ public class WeaponEditActivity extends AppCompatActivity {
         mEditPriceForShoot.setText(String.valueOf(weapon.priceForShoot));
         mWeaponImage.setImageBitmap(BitmapFactory.decodeByteArray(weapon.weapon_image, 0, weapon.weapon_image.length));
         replyIntent.putExtra(WEAPON_IMAGE_REPLY, weapon.weapon_image);
+        mCaliberSpinner.post(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+                for(Caliber c:caliberList){
+                    i++;
+                    if(c.caliberId== weapon.fk_caliber_id) break;
+                }
+                mCaliberSpinner.setSelection(i-1);
+            }
+        });
+
     }
 
     @Override

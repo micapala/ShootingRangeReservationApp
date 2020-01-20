@@ -77,9 +77,14 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_WEAPON_ACTIVITY_REQUEST_CODE ) {
 
-            if(resultCode==WeaponEditActivity.RESULT_DELETE_WEAPON){
+            if(resultCode == RESULT_CANCELED){
+                Toast.makeText(
+                        getApplicationContext(),
+                        R.string.empty_not_saved,
+                        Toast.LENGTH_LONG).show();
+            }
+            else if(resultCode==WeaponEditActivity.RESULT_DELETE_WEAPON){
                 int weapon_id = data.getIntExtra(WeaponEditActivity.WEAPON_ID_REPLY, -1);
-                Log.d("DELETE RESULTT",String.valueOf(weapon_id));
                 mWeaponViewModel.deleteWeapon(weapon_id);
             }
             else {
@@ -95,11 +100,6 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
                     mWeaponViewModel.updateWeapon(weapon_id, weapon_image, weapon_name, Integer.valueOf(caliber_id), Float.valueOf(price_for_shoot));
                 }
             }
-        } else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show();
         }
     }
 

@@ -26,7 +26,7 @@ public class Weapon
     @ColumnInfo(name = "weaponModel")
     public String weaponModel;
 
-    @ColumnInfo(name = "fk_caliber_id")
+    @ColumnInfo(name = "fk_caliber_id",index = true)
     public int fk_caliber_id;
 
     @ColumnInfo(name = "priceForShoot")
