@@ -30,9 +30,9 @@ public class Weapon
     public int fk_caliber_id;
 
     @ColumnInfo(name = "priceForShoot")
-    public int priceForShoot;
+    public double priceForShoot;
 
-    public Weapon(byte[] weapon_image,String weaponModel,int fk_caliber_id,int priceForShoot){
+    public Weapon(byte[] weapon_image,String weaponModel,int fk_caliber_id,double priceForShoot){
         this.weapon_image = weapon_image;
         this.weaponModel=weaponModel;
         this.fk_caliber_id = fk_caliber_id;

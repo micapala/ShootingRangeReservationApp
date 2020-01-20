@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity  {
             String caliber_id = data.getStringExtra(NewWeaponActivity.CALIBER_ID_REPLY);
             String price_for_shoot = data.getStringExtra(NewWeaponActivity.PRICE_FOR_SHOOT_REPLY);
             byte[] weapon_image = data.getByteArrayExtra(NewWeaponActivity.WEAPON_IMAGE_REPLY);
-            Weapon word = new Weapon(weapon_image,weapon_name,Integer.parseInt(caliber_id),Integer.parseInt(price_for_shoot));
+            Weapon word = new Weapon(weapon_image,weapon_name,Integer.parseInt(caliber_id),Double.parseDouble(price_for_shoot));
 
             mWeaponViewModel.insertWeapon(word);
         } else {
