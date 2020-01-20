@@ -1,5 +1,6 @@
-package com.pz.activities;
+package com.pz.activities.weapon;
 
+import com.pz.activities.R;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Weapon;
 import android.content.Context;
@@ -55,7 +56,7 @@ public class WeaponListAdapter extends RecyclerView.Adapter<WeaponListAdapter.We
 
     @Override
     public WeaponViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+        View itemView = mInflater.inflate(R.layout.recyclerview_weapon_item, parent, false);
         return new WeaponViewHolder(itemView,listener);
     }
 

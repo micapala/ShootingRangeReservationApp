@@ -1,9 +1,11 @@
-package com.pz.activities;
+package com.pz.activities.weapon;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 
@@ -22,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.pz.activities.R;
+import com.pz.activities.ShootingRangeViewModel;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Weapon;
 
@@ -37,8 +41,11 @@ public class WeaponEditActivity extends AppCompatActivity {
     public static final String CALIBER_ID_REPLY = "com.example.android.weapon.caliber_id.REPLY";
     public static final String PRICE_FOR_SHOOT_REPLY = "com.example.android.weapon.price_for_shoot.REPLY";
     public static final String WEAPON_IMAGE_REPLY = "com.example.android.weapon.weapon_image.REPLY";
-    public static final String WEAPON_EDIT_REPLY = "com.example.android.weapon.weapon_edit.REPLY";
-    public static final String WEAPON_NEW_REPLY = "com.example.android.weapon.weapon_edit.REPLY";
+    public static final String WEAPON_ID_REPLY = "com.example.android.weapon.weapon_edit.REPLY";
+
+    public static final int RESULT_NEW_WEAPON = 1;
+    public static final int RESULT_EDIT_WEAPON = 2;
+    public static final int RESULT_DELETE_WEAPON = 3;
     private static int RESULT_LOAD_IMAGE = 1;
 
     private EditText mEditWeaponName;
@@ -63,12 +70,12 @@ public class WeaponEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent callerIntent = this.getIntent();
         setContentView(R.layout.activity_new_weapon);
-        final Button button = findViewById(R.id.save_button);
+        final Button save_button = findViewById(R.id.save_button);
+
         Button add_image_button = findViewById(R.id.add_image_button);
+        Button remove_weapon_button = findViewById(R.id.delete_weapon_button);
 
-
-
-        viewModel = MainActivity.mWeaponViewModel;
+        viewModel = new ViewModelProvider(this).get(ShootingRangeViewModel.class);
 
         mEditWeaponName = findViewById(R.id.edit_weapon_name);
         mEditPriceForShoot = findViewById(R.id.edit_price_for_shoot);
@@ -79,7 +86,17 @@ public class WeaponEditActivity extends AppCompatActivity {
         if(callerIntent!=null&&callerIntent.hasExtra("weapon_id")){
             getWeaponAndSetFields(callerIntent.getIntExtra("weapon_id",-1));
             isEditActivity = true;
+            remove_weapon_button.setVisibility(View.VISIBLE);
         }
+
+        remove_weapon_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_DELETE_WEAPON, replyIntent);
+                replyIntent.putExtra(WEAPON_ID_REPLY,callerIntent.getIntExtra("weapon_id",-1));
+                finish();
+            }
+        });
 
 
 
@@ -91,7 +108,7 @@ public class WeaponEditActivity extends AppCompatActivity {
                 startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
+        save_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (TextUtils.isEmpty(mEditWeaponName.getText())||
                         TextUtils.isEmpty(mCaliberSpinner.getSelectedItem().toString())||
@@ -99,10 +116,11 @@ public class WeaponEditActivity extends AppCompatActivity {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     if(isEditActivity) {
-                        replyIntent.putExtra(WEAPON_EDIT_REPLY,callerIntent.getIntExtra("weapon_id",-1));
+                        replyIntent.putExtra(WEAPON_ID_REPLY,callerIntent.getIntExtra("weapon_id",-1));
+                        setResult(RESULT_EDIT_WEAPON, replyIntent);
                     }
                     else{
-                        replyIntent.putExtra(WEAPON_NEW_REPLY,"NEW");
+                        setResult(RESULT_NEW_WEAPON, replyIntent);
                     }
                     String weapon_name = mEditWeaponName.getText().toString();
                     String priceForShoot = mEditPriceForShoot.getText().toString();
@@ -110,7 +128,7 @@ public class WeaponEditActivity extends AppCompatActivity {
                     replyIntent.putExtra(WEAPON_NAME_REPLY, weapon_name);
                     replyIntent.putExtra(PRICE_FOR_SHOOT_REPLY, priceForShoot);
                     replyIntent.putExtra(CALIBER_ID_REPLY, caliberPk);
-                    setResult(RESULT_OK, replyIntent);
+
                 }
                 finish();
             }

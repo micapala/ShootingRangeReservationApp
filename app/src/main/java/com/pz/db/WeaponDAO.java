@@ -26,6 +26,9 @@ public interface WeaponDAO {
     @Query("DELETE FROM weapon_t")
     void deleteAllWeapons();
 
+    @Query("DELETE FROM weapon_t where weapon_id = :weaponId")
+    void deleteWeapon(int weaponId);
+
     @Query("SELECT * from weapon_t " +
             "join caliber_t on weapon_t.fk_caliber_id = caliber_t.caliber_id" +
             " ORDER BY weaponModel ASC")

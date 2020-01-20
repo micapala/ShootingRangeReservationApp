@@ -39,6 +39,10 @@ public class ShootingRangeViewModel extends AndroidViewModel {
         return mAllCalibers;
     }
 
+    public void deleteWeapon(int weapon_id){
+        mRepository.deleteWeapon(weapon_id);
+    }
+
     public void updateWeapon(int weapon_id,byte[] weapon_image,String weaponModel,int fk_caliber_id,double priceForShoot){
         mRepository.updateWeapon(weapon_id,weapon_image,weaponModel,fk_caliber_id,priceForShoot);
     }
