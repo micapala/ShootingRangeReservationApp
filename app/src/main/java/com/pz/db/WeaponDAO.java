@@ -47,6 +47,6 @@ public interface WeaponDAO {
             "fk_caliber_id = :fk_caliber_id," +
             "priceForShoot = :priceForShoot " +
             "WHERE weapon_id = :weapon_id")
-    void updateWeapon(int weapon_id,byte[] weapon_image,String weaponModel,int fk_caliber_id,int priceForShoot);
+    void updateWeapon(int weapon_id,byte[] weapon_image,String weaponModel,int fk_caliber_id,double priceForShoot);
 
 }

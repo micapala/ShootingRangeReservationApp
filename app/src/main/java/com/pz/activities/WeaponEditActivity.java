@@ -51,7 +51,7 @@ public class WeaponEditActivity extends AppCompatActivity {
     private List<Weapon> weaponList;
 
     private Intent replyIntent = new Intent();
-    private Intent callerIntent = this.getIntent();
+
 
     private ShootingRangeViewModel viewModel;
 
@@ -61,7 +61,7 @@ public class WeaponEditActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Intent callerIntent = this.getIntent();
         setContentView(R.layout.activity_new_weapon);
         final Button button = findViewById(R.id.save_button);
         Button add_image_button = findViewById(R.id.add_image_button);

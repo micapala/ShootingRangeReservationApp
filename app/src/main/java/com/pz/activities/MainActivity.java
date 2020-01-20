@@ -81,12 +81,12 @@ public class MainActivity extends AppCompatActivity implements WeaponClickListen
 
 
             if(data.getStringExtra(WeaponEditActivity.WEAPON_NEW_REPLY)!=null){
-                Weapon weapon = new Weapon(weapon_image,weapon_name,Integer.parseInt(caliber_id),Integer.parseInt(price_for_shoot));
+                Weapon weapon = new Weapon(weapon_image,weapon_name,Integer.parseInt(caliber_id),Float.parseFloat(price_for_shoot));
                 mWeaponViewModel.insertWeapon(weapon);
             }
             else{
                 int weapon_id = data.getIntExtra(WeaponEditActivity.WEAPON_EDIT_REPLY,-1);
-                mWeaponViewModel.updateWeapon(weapon_id,weapon_image,weapon_name,Integer.valueOf(caliber_id),Integer.valueOf(price_for_shoot));
+                mWeaponViewModel.updateWeapon(weapon_id,weapon_image,weapon_name,Integer.valueOf(caliber_id),Float.valueOf(price_for_shoot));
             }
         } else {
             Toast.makeText(
