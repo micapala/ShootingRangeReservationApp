@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pz.activities.caliber.ListCalibersActivity;
 import com.pz.activities.weapon.ListWeaponsActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -25,6 +26,13 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainMenuActivity.this, ListWeaponsActivity.class);
+                startActivity(intent);
+            }
+        });
+        calibers_menu_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenuActivity.this, ListCalibersActivity.class);
                 startActivity(intent);
             }
         });
