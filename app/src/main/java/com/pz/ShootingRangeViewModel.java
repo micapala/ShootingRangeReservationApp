@@ -1,4 +1,4 @@
-package com.pz.activities;
+package com.pz;
 
 import android.app.Application;
 

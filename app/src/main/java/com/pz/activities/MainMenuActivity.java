@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.pz.activities.weapon.ListWeaponsActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity {
 
 
     @Override
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         weapons_menu_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ListWeaponsActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this, ListWeaponsActivity.class);
                 startActivity(intent);
             }
         });

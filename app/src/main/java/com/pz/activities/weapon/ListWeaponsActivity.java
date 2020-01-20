@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.pz.activities.R;
-import com.pz.activities.ShootingRangeViewModel;
+import com.pz.ShootingRangeViewModel;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Weapon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

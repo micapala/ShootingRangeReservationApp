@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 
@@ -25,7 +24,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.pz.activities.R;
-import com.pz.activities.ShootingRangeViewModel;
+import com.pz.ShootingRangeViewModel;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Weapon;
 
