@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.pz.activities.weapon.WeaponEditActivity"></activity>
         <activity android:name="com.pz.activities.weapon.ListWeaponsActivity"></activity>
+        <activity android:name="com.pz.activities.caliber.ListCalibersActivity"></activity>
         <activity android:name="com.pz.activities.reservation.ReservationEditActivity"
             android:theme = "@style/AppTheme.NoActionBar"></activity>
         <activity
