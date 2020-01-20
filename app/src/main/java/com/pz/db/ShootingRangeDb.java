@@ -14,7 +14,7 @@ import com.pz.db.entities.Weapon;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Weapon.class,Caliber.class}, version = 1, exportSchema = false)
+@Database(entities = {Weapon.class,Caliber.class}, version = 2, exportSchema = false)
 public abstract class ShootingRangeDb extends RoomDatabase {
     public abstract WeaponDAO weaponDAO();
 
@@ -41,6 +41,7 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ShootingRangeDb.class, "ShootingRangeDb")
                             .addCallback(sRoomDatabaseCallback)
+                            //.fallbackToDestructiveMigration()
                             .build();
                 }
             }

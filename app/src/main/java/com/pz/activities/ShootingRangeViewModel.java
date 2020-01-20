@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.pz.db.ShootingRangeDb;
 import com.pz.db.ShootingRangeRepository;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Weapon;

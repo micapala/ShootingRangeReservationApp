@@ -11,11 +11,12 @@ public class Caliber {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "caliber_id",index = true)
     public int caliberId;
+
     @ColumnInfo(name = "caliber_name")
     public String caliberName;
-
 
     public Caliber(String caliberName){
         this.caliberName = caliberName;
     }
+
 }

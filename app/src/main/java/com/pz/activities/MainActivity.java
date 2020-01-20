@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -77,7 +77,9 @@ public class MainActivity extends AppCompatActivity  {
             String weapon_name = data.getStringExtra(NewWeaponActivity.WEAPON_NAME_REPLY);
             String caliber_id = data.getStringExtra(NewWeaponActivity.CALIBER_ID_REPLY);
             String price_for_shoot = data.getStringExtra(NewWeaponActivity.PRICE_FOR_SHOOT_REPLY);
-            Weapon word = new Weapon(weapon_name,Integer.parseInt(caliber_id),Integer.parseInt(price_for_shoot));
+            byte[] weapon_image = data.getByteArrayExtra(NewWeaponActivity.WEAPON_IMAGE_REPLY);
+            Weapon word = new Weapon(weapon_image,weapon_name,Integer.parseInt(caliber_id),Integer.parseInt(price_for_shoot));
+
             mWeaponViewModel.insertWeapon(word);
         } else {
             Toast.makeText(
@@ -87,4 +89,13 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 }
+
+
+
+
+
+
+
+
+
 
