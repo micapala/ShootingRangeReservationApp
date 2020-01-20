@@ -1,16 +1,15 @@
 package com.pz.activities;
 
-import com.pz.db.ShootingRangeDb;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Weapon;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -18,12 +17,14 @@ import java.util.List;
 public class WeaponListAdapter extends RecyclerView.Adapter<WeaponListAdapter.WeaponViewHolder> {
 
     class WeaponViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView weaponImageView;
         private final TextView weaponNameView;
         private final TextView weaponCaliberView;
         private final TextView weaponPriceView;
 
         private WeaponViewHolder(View itemView) {
             super(itemView);
+            weaponImageView = itemView.findViewById(R.id.weaponImageView);
             weaponNameView = itemView.findViewById(R.id.weaponNameView);
             weaponCaliberView = itemView.findViewById(R.id.weaponCaliberView);
             weaponPriceView = itemView.findViewById(R.id.priceForShootView);
@@ -48,6 +49,7 @@ public class WeaponListAdapter extends RecyclerView.Adapter<WeaponListAdapter.We
             Weapon current = mWeapons.get(position);
             holder.weaponNameView.setText(current.weaponModel);
             holder.weaponPriceView.setText(String.valueOf(current.priceForShoot));
+            holder.weaponImageView.setImageBitmap( BitmapFactory.decodeByteArray(current.weapon_image, 0, current.weapon_image.length));
             for (Caliber cal:mCalibers){
                 if(cal.caliberId==current.fk_caliber_id) holder.weaponCaliberView.setText(cal.caliberName);
             }
