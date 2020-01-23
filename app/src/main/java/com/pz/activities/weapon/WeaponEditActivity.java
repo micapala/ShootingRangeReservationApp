@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.applandeo.materialcalendarview.utils.ImageUtils;
 import com.pz.activities.R;
 import com.pz.ShootingRangeViewModel;
 import com.pz.db.entities.Caliber;
@@ -201,7 +200,7 @@ public class WeaponEditActivity extends AppCompatActivity {
     private void createCalibersSpinner(){
         List<String> caliberStrings = new LinkedList<>();
         caliberList = new LinkedList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line,
                 caliberStrings);
         mCaliberSpinner = findViewById(R.id.select_caliber);

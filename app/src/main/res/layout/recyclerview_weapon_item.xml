@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         app:srcCompat="@android:drawable/alert_dark_frame"
-        tools:srcCompat="@drawable/ic_launcher_foreground" />
+        tools:srcCompat="@drawable/ic_launcher_foreground"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,16 +32,17 @@
         <TextView
             android:id="@+id/weaponNameView"
             style="@style/weapon_title"
-            android:layout_width="110dp"
+            android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:background="@color/buttonLabel"
+            android:background="#F5F4F4"
 
             android:gravity="center_horizontal|center_vertical" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
+            android:baselineAligned="true"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -54,7 +56,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="kaliber"
+                    android:text="@string/weapon_caliber_hint"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <TextView
@@ -75,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cena za strzał:"
+                    android:text="@string/weapon_price_for_shoot"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 <TextView

@@ -2,7 +2,6 @@ package com.pz.activities.weapon;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ListWeaponsActivity extends AppCompatActivity implements WeaponClickListener {
     public static ShootingRangeViewModel mWeaponViewModel;
     public static final int NEW_WEAPON_ACTIVITY_REQUEST_CODE = 1;
-    public static final int WEAPON_INFO_ACTIVITY_REQUEST_CODE = 2;
 
     private WeaponListAdapter adapter;
 
@@ -37,7 +35,7 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_weapons);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = findViewById(R.id.weapons_recyclerview);
         adapter = new WeaponListAdapter(this,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -53,12 +51,11 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
         mWeaponViewModel.getAllCalibers().observe(this, new Observer<List<Caliber>>() {
             @Override
             public void onChanged(@Nullable final List<Caliber> calibers) {
-                // Update the cached copy of the words in the adapter.
                 adapter.setCalibers(calibers);
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.add_weapon_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

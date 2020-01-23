@@ -1,8 +1,6 @@
 package com.pz.activities.caliber;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pz.activities.R;
 import com.pz.ShootingRangeViewModel;
-import com.pz.activities.caliber.CaliberClickListener;
-import com.pz.activities.weapon.WeaponEditActivity;
 import com.pz.db.entities.Caliber;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,7 +29,7 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_calibers);
 
-        RecyclerView recyclerView = findViewById(R.id.calibers_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.calibers_recyclerview);
         adapter = new CaliberListAdapter(this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,7 +44,7 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.add_caliber_button);
 
             /*
             tutaj bedzie edycja kalibru
@@ -59,7 +54,7 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
 
             public void onClick(View view) {
                 //tutaj trzeba zmienic jeszcze ten weaponeditactivity
-                Intent intent = new Intent(ListCalibersActivity.this, WeaponEditActivity.class);
+                Intent intent = new Intent(ListCalibersActivity.this, CaliberEditActivity.class);
                 startActivityForResult(intent, NEW_WEAPON_ACTIVITY_REQUEST_CODE);
             }
 

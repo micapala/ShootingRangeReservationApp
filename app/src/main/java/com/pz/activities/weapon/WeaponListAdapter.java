@@ -46,7 +46,7 @@ public class WeaponListAdapter extends RecyclerView.Adapter<WeaponListAdapter.We
     private WeaponClickListener listener;
 
     private final LayoutInflater mInflater;
-    private List<Weapon> mWeapons; // Cached copy of words
+    private List<Weapon> mWeapons;
     private List<Caliber> mCalibers;
 
     public WeaponListAdapter(Context context,WeaponClickListener listener) {
@@ -71,8 +71,7 @@ public class WeaponListAdapter extends RecyclerView.Adapter<WeaponListAdapter.We
                 if(cal.caliberId==current.fk_caliber_id) holder.weaponCaliberView.setText(cal.caliberName);
             }
         } else {
-            // Covers the case of data not being ready yet.
-            holder.weaponNameView.setText("No Word");
+            holder.weaponNameView.setText("No Weapon");
         }
     }
 

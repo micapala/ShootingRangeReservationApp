@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pz.activities.caliber.ListCalibersActivity;
-import com.pz.activities.reservation.ReservationEditActivity;
+import com.pz.activities.reservation.ListReservationsActivity;
 import com.pz.activities.weapon.ListWeaponsActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -40,7 +40,7 @@ public class MainMenuActivity extends AppCompatActivity {
         reservations_menu_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainMenuActivity.this, ReservationEditActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this, ListReservationsActivity.class);
                 startActivity(intent);
             }
         });

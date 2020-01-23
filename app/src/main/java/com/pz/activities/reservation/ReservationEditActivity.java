@@ -107,13 +107,11 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
 
         for(int hour =ShootingRangeViewModel.openingHour;hour<ShootingRangeViewModel.closeHour;hour++){
             boolean isValidHour = true;
-            if(reservationsOfDay!=null) {
                 for (Reservation r : reservationsOfDay) {
                     if (hour < r.reservation_hour + r.number_of_Hours && hour + numberOfHours > r.reservation_hour){
                         isValidHour = false;
                         break;
                     }
-                }
             }
             if(isValidHour&&((hour+numberOfHours)<=ShootingRangeViewModel.closeHour))
                 hoursList.add(String.valueOf(hour));

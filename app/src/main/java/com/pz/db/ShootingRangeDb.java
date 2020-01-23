@@ -30,14 +30,6 @@ public abstract class ShootingRangeDb extends RoomDatabase {
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public synchronized static ShootingRangeDb getInstance(Context context) {
-        if (INSTANCE == null) {
-            INSTANCE = getDatabase(context);
-        }
-        return INSTANCE;
-    }
-
-
     static ShootingRangeDb getDatabase(final Context context){
         if (INSTANCE == null){
             synchronized (ShootingRangeDb.class) {
@@ -59,12 +51,10 @@ public abstract class ShootingRangeDb extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
             databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more words, just add them.
+
                 WeaponDAO weaponDAO = INSTANCE.weaponDAO();
                 ReservationDAO reservationDAO = INSTANCE.reservationDAO();
                 reservationDAO.deleteAllReservations();
-               // wea.deleteAllWeapons();
                 weaponDAO.deleteAllCalibers();
 
                 Caliber cal1 = new Caliber("9 mm");
@@ -87,9 +77,6 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 weaponDAO.insertCaliber(cal7);
                 weaponDAO.insertCaliber(cal8);
                 weaponDAO.insertCaliber(cal9);
-
-                //Weapon word = new Weapon("Hello",0,99);
-                //wea.insertWeapon(word);
             });
         }
     };

@@ -1,20 +1,16 @@
 package com.pz.activities.caliber;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pz.activities.R;
-import com.pz.activities.caliber.CaliberClickListener;
 import com.pz.db.entities.Caliber;
-import com.pz.db.entities.Weapon;
 
 import java.util.List;
 
@@ -47,7 +43,7 @@ public class CaliberListAdapter extends RecyclerView.Adapter<CaliberListAdapter.
     private final LayoutInflater mInflater;
     private List<Caliber> mCalibers;
 
-    public CaliberListAdapter(Context context, CaliberClickListener listener){
+    protected CaliberListAdapter(Context context, CaliberClickListener listener){
         this.mInflater = LayoutInflater.from(context);
         this.listener = listener;
     }
@@ -62,12 +58,8 @@ public class CaliberListAdapter extends RecyclerView.Adapter<CaliberListAdapter.
     public void onBindViewHolder(@NonNull WeaponViewHolder holder, int position) {
         if (mCalibers!=null) {
             Caliber current = mCalibers.get(position);
-
-
             holder.weaponCaliberView.setText(current.caliberName);
-
         } else {
-            // Covers the case of data not being ready yet.
             holder.weaponCaliberView.setText("No Caliber");
         }
     }
