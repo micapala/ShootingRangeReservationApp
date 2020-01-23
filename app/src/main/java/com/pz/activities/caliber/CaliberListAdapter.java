@@ -32,7 +32,7 @@ public class CaliberListAdapter extends RecyclerView.Adapter<CaliberListAdapter.
             super(itemView);
             this.listener = listener;
 
-            weaponCaliberView = itemView.findViewById(R.id.weaponCaliberView);
+            weaponCaliberView = itemView.findViewById(R.id.caliberName);
             itemView.setOnClickListener(this);
         }
 
@@ -63,12 +63,12 @@ public class CaliberListAdapter extends RecyclerView.Adapter<CaliberListAdapter.
         if (mCalibers!=null) {
             Caliber current = mCalibers.get(position);
 
-            for (Caliber cal:mCalibers){
-                if(cal.caliberId==current.caliberId) holder.weaponCaliberView.setText(cal.caliberName);
-            }
+
+            holder.weaponCaliberView.setText(current.caliberName);
+
         } else {
             // Covers the case of data not being ready yet.
-            holder.weaponCaliberView.setText("No Word");
+            holder.weaponCaliberView.setText("No Caliber");
         }
     }
 

@@ -34,7 +34,7 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_calibers);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = findViewById(R.id.calibers_recycler_view);
         adapter = new CaliberListAdapter(this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -45,7 +45,6 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
         mCaliberViewModel.getAllCalibers().observe(this, new Observer<List<Caliber>>() {
             @Override
             public void onChanged(@Nullable final List<Caliber> calibers) {
-                // Update the cached copy of the words in the adapter.
                 adapter.setCalibers(calibers);
             }
         });
