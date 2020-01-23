@@ -31,22 +31,28 @@ public interface WeaponDAO {
     @Query("DELETE FROM weapon_t where weapon_id = :weaponId")
     void deleteWeapon(int weaponId);
 
+    @Query("DELETE FROM caliber_t where caliber_id = :caliberId")
+    void deleteCaliber(int caliberId);
+
     @Query("SELECT * from weapon_t " +
             "join caliber_t on weapon_t.fk_caliber_id = caliber_t.caliber_id" +
             " ORDER BY weaponModel ASC")
-    LiveData<List<Weapon>> getAlphabetizedWeapons();
+    LiveData<List<Weapon>> getAlphabetizedWeaponsLive();
 
     @Query("SELECT * from caliber_t")
-    LiveData<List<Caliber>> getAllCalibers();
+    LiveData<List<Caliber>> getAllCalibersLive();
 
 
 
     @Query("SELECT * from weapon_t " +
             "join caliber_t on weapon_t.fk_caliber_id = caliber_t.caliber_id")
-    LiveData<List<Weapon>> getAllWeapons();
+    LiveData<List<Weapon>> getAllWeaponsLive();
 
-    @Query("SELECT * from caliber_t where caliber_name = :name")
-    LiveData<List<Caliber>> getCaliberByName(String name);
+    @Query("SELECT * from weapon_t " +
+            "join caliber_t on weapon_t.fk_caliber_id = caliber_t.caliber_id" +
+            " ORDER BY weaponModel ASC")
+    List<Weapon> getAllWeaponsAlphabetized();
+
 
     @Query("UPDATE weapon_t SET " +
             "weaponModel = :weaponModel," +

@@ -19,7 +19,11 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="83dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="50dip"
+        android:maxHeight="50dip"
+        android:scaleType="fitCenter"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -45,31 +49,65 @@
         android:padding="@dimen/small_padding"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Kaliber" />
+        android:layout_height="245dp"
+        android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/select_caliber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        tools:visibility="visible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cena za strzał" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="203dp"
+                android:layout_height="wrap_content"
+                android:text="Kaliber" />
 
-    <EditText
-        android:id="@+id/edit_price_for_shoot"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="266dp"
+                android:layout_height="wrap_content"
+                android:text="Cena za strzał" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/select_caliber"
+                android:layout_width="201dp"
+                android:layout_height="45dp"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
+            <EditText
+                android:id="@+id/edit_price_for_shoot"
+                android:layout_width="189dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="zł" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/delete_weapon_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:text="@string/button_delete_weapon"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/save_button"
@@ -78,12 +116,5 @@
         android:background="@color/colorPrimary"
         android:text="@string/button_save"
         android:textColor="@color/buttonLabel" />
-
-    <Button
-        android:id="@+id/delete_weapon_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_delete_weapon"
-        android:visibility="invisible" />
 
 </LinearLayout>

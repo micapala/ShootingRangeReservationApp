@@ -36,19 +36,19 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
         setContentView(R.layout.activity_list_weapons);
 
         RecyclerView recyclerView = findViewById(R.id.weapons_recyclerview);
-        adapter = new WeaponListAdapter(this,this);
+        adapter = new WeaponListAdapter(this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mWeaponViewModel = new ViewModelProvider(this).get(ShootingRangeViewModel.class);
 
-        mWeaponViewModel.getAllWeapons().observe(this, new Observer<List<Weapon>>() {
+        mWeaponViewModel.getAllWeaponsLive().observe(this, new Observer<List<Weapon>>() {
             @Override
             public void onChanged(@Nullable final List<Weapon> weapons) {
                 adapter.setWeapons(weapons);
             }
         });
-        mWeaponViewModel.getAllCalibers().observe(this, new Observer<List<Caliber>>() {
+        mWeaponViewModel.getAllCalibersLive().observe(this, new Observer<List<Caliber>>() {
             @Override
             public void onChanged(@Nullable final List<Caliber> calibers) {
                 adapter.setCalibers(calibers);
@@ -64,10 +64,7 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
             }
         });
 
-
-
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -103,7 +100,7 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
     @Override
     public void onWeaponClick(int position) {
         List<Weapon> weapons = new ArrayList<>();
-        mWeaponViewModel.getAllWeapons().observe(this, new Observer<List<Weapon>>() {
+        mWeaponViewModel.getAllWeaponsLive().observe(this, new Observer<List<Weapon>>() {
             @Override
             public void onChanged(@Nullable final List<Weapon> weaponsDb) {
                 for(Weapon w:weaponsDb)

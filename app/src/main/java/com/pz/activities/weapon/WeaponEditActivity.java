@@ -163,6 +163,9 @@ public class WeaponEditActivity extends AppCompatActivity {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                //mWeaponImage.setScaleType(ImageView.ScaleType.FIT_XY);
+                final double viewWidthToBitmapWidthRatio = (double)selectedImage.getWidth() / (double)selectedImage.getWidth();
+                mWeaponImage.getLayoutParams().height = (int) (selectedImage.getHeight() * viewWidthToBitmapWidthRatio);
                 mWeaponImage.setImageBitmap(selectedImage);
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 selectedImage.compress(Bitmap.CompressFormat.PNG, 100, bos);
@@ -187,7 +190,7 @@ public class WeaponEditActivity extends AppCompatActivity {
         return null;
     }
     private void getWeaponAndSetFields(int weapon_id){
-        viewModel.getAllWeapons().observe(this, new Observer<List<Weapon>>() {
+        viewModel.getAllWeaponsLive().observe(this, new Observer<List<Weapon>>() {
             @Override
             public void onChanged(@Nullable final List<Weapon> weaponsDb) {
                 for(Weapon weapon:weaponsDb){
@@ -206,7 +209,7 @@ public class WeaponEditActivity extends AppCompatActivity {
         mCaliberSpinner = findViewById(R.id.select_caliber);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCaliberSpinner.setAdapter(adapter);
-        viewModel.getAllCalibers().observe(this, new Observer<List<Caliber>>() {
+        viewModel.getAllCalibersLive().observe(this, new Observer<List<Caliber>>() {
             @Override
             public void onChanged(@Nullable final List<Caliber> calibers) {
                 for(Caliber cal:calibers){

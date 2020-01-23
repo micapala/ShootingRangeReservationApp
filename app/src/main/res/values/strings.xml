@@ -19,5 +19,6 @@
     <string name="reservation_save_button">Zapisz rezerwacje</string>
     <string name="reservation_numberOfHours">Liczba godzin</string>
     <string name="reservation_hour">Godzina rezerwacji</string>
+    <string name="caliber_button_delete">Usuń kaliber</string>
 
 </resources>

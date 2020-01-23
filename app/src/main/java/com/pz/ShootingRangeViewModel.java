@@ -1,7 +1,6 @@
 package com.pz;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -27,50 +26,50 @@ public class ShootingRangeViewModel extends AndroidViewModel {
     public ShootingRangeViewModel(Application application) {
         super(application);
         mRepository = new ShootingRangeRepository(application);
-        mAllWeapons = mRepository.getAllWeapons();
-        mAllCalibers = mRepository.getAllCalibers();
-        mAllReservations = mRepository.getAllReservations();
+        mAllWeapons = mRepository.getAllWeaponsLive();
+        mAllCalibers = mRepository.getAllCalibersLive();
+        mAllReservations = mRepository.getAllReservationsLive();
     }
 
-    public LiveData<List<Weapon>> getAllWeapons() {
+    public LiveData<List<Weapon>> getAllWeaponsLive() {
         if (mAllWeapons == null) {
-            mAllWeapons = mRepository.getAllWeapons();
+            mAllWeapons = mRepository.getAllWeaponsLive();
         }
         return mAllWeapons;
     }
+    public List<Weapon> getAllWeapons(){
+        return mRepository.getAllWeaponsAlphabetized();
+    }
 
-    public LiveData<List<Caliber>> getAllCalibers() {
+    public LiveData<List<Caliber>> getAllCalibersLive() {
         if (mAllCalibers == null) {
-            mAllCalibers = mRepository.getAllCalibers();
+            mAllCalibers = mRepository.getAllCalibersLive();
         }
         return mAllCalibers;
     }
 
-    public List<Reservation> getReservationsOfDay(long day) {
-        List<Reservation> reservationList = mAllReservations.getValue();
-        if(reservationList!=null) {
-            for (Reservation r : reservationList) {
-                if (r.reservation_date != day) reservationList.remove(r);
-            }
-        }
-        return reservationList;
-    }
-
-    public LiveData<List<Reservation>> getAllReservations() {
+    public LiveData<List<Reservation>> getAllReservationsLive() {
 
         if (mAllReservations == null) {
-            mAllReservations = mRepository.getAllReservations();
+            mAllReservations = mRepository.getAllReservationsLive();
         }
         return mAllReservations;
     }
+    public LiveData<List<Reservation>> getReservationsFromDay(long date) {
+        return mRepository.getReservationsFromDay(date);
+    }
 
-    public List<Reservation> getAllR() {
+    public List<Reservation> getAllReservations() {
 
-        return mRepository.getAllR();
+        return mRepository.getAllReservations();
     }
 
     public void deleteWeapon(int weapon_id) {
         mRepository.deleteWeapon(weapon_id);
+    }
+
+    public void deleteCaliber(int caliber_id) {
+        mRepository.deleteCaliber(caliber_id);
     }
 
     public void updateWeapon(int weapon_id, byte[] weapon_image, String weaponModel, int fk_caliber_id, double priceForShoot) {
@@ -88,6 +87,8 @@ public class ShootingRangeViewModel extends AndroidViewModel {
     public void insertReservation(Reservation reservation) {
         mRepository.insertReservation(reservation);
     }
+
+
 
 
 }

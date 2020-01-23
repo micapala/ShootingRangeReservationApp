@@ -36,7 +36,7 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ShootingRangeDb.class, "ShootingRangeDb")
-                            .allowMainThreadQueries()
+                           // .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
                             .addCallback(sRoomDatabaseCallback)
                             //.fallbackToDestructiveMigration()

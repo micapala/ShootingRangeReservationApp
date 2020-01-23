@@ -23,8 +23,8 @@ public interface ReservationDAO {
     @Query("SELECT * from reservation_t")
     List<Reservation> getAllReservations();
 
-    @Query("SELECT * from reservation_t where reservation_date = :date")
-    LiveData<List<Reservation>> getDateReservations(long date);
+    @Query("SELECT * from reservation_t where reservation_date = :date order by reservation_date")
+    LiveData<List<Reservation>> getReservationsFromDay(long date);
 
     @Query("DELETE FROM reservation_t")
     void deleteAllReservations();
