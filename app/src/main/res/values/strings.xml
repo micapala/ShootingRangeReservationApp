@@ -37,4 +37,5 @@
     <string name="track_item_length_hint">Długość toru</string>
     <string name="delete_hint">Usuń</string>
     <string name="edit_hint">Edytuj</string>
+    <string name="edytuj">Edytuj</string>
 </resources>
