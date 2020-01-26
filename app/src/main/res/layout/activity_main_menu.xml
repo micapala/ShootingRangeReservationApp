@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="15dp"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/main_menu_weapons_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_weapons" />
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#C1FFBA"
+
+        android:text="@string/main_menu_weapons"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
         android:id="@+id/main_menu_reservations_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_reservations" />
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:background="#C1FFBA"
+        android:text="@string/main_menu_reservations"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
         android:id="@+id/main_menu_calibers_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_calibers" />
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:background="#C1FFBA"
+        android:text="@string/main_menu_calibers"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
         android:id="@+id/main_menu_tracks_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_tracks" />
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:background="#C1FFBA"
+        android:text="@string/main_menu_tracks"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 </LinearLayout>
