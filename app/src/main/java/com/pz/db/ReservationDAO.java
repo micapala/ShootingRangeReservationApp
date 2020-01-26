@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.pz.db.entities.Reservation;
+import com.pz.db.entities.Track;
 
 import java.util.List;
 
@@ -28,4 +29,16 @@ public interface ReservationDAO {
 
     @Query("DELETE FROM reservation_t")
     void deleteAllReservations();
+
+    @Query("SELECT * from track_t")
+    LiveData<List<Track>> getAllTracksLive();
+
+    @Query("SELECT * from track_t")
+    List<Track> getAllTracks();
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertTrack(Track track);
+
+    @Query("DELETE FROM track_t")
+    void deleteAllTracks();
 }

@@ -27,7 +27,7 @@ public class CaliberListAdapter extends RecyclerView.Adapter<CaliberListAdapter.
 
         private final TextView caliberNameView;
         private final Button caliberDeleteView;
-        private final Button caliberEditView;
+        //private final Button caliberEditView;
 
         private CaliberClickListener listener;
 
@@ -37,7 +37,7 @@ public class CaliberListAdapter extends RecyclerView.Adapter<CaliberListAdapter.
 
             caliberNameView = itemView.findViewById(R.id.caliberName);
             caliberDeleteView = itemView.findViewById(R.id.caliber_delete_button);
-            caliberEditView = itemView.findViewById(R.id.caliber_edit_button);
+            //caliberEditView = itemView.findViewById(R.id.caliber_edit_button);
             caliberDeleteView.setOnClickListener(this);
         }
 
@@ -46,13 +46,13 @@ public class CaliberListAdapter extends RecyclerView.Adapter<CaliberListAdapter.
             if (listener != null){
                 if(v.getId()==R.id.caliber_delete_button)
                     listener.onCaliberClick(v.getId(),getAdapterPosition(),mCalibers);
-                else if(v.getId()==R.id.caliber_edit_button) {
-                    caliberNameView.setInputType(InputType.TYPE_CLASS_TEXT);
-                    caliberNameView.setFocusable(true);
-                    caliberNameView.setFocusableInTouchMode(true);
-                    caliberNameView.setClickable(true);
+                //else if(v.getId()==R.id.caliber_edit_button) {
+                   // caliberNameView.setInputType(InputType.TYPE_CLASS_TEXT);
+                  //  caliberNameView.setFocusable(true);
+                   // caliberNameView.setFocusableInTouchMode(true);
+                   // caliberNameView.setClickable(true);
 
-                }
+               // }
                 else
                     listener.onCaliberClick(itemView.getId(),getAdapterPosition(),mCalibers);
             }

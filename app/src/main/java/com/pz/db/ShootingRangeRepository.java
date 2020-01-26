@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Reservation;
+import com.pz.db.entities.Track;
 import com.pz.db.entities.Weapon;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ShootingRangeRepository {
     private LiveData<List<Weapon>> mAllWeapons;
     private LiveData<List<Caliber>> mAllCalibers;
     private LiveData<List<Reservation>> mAllReservations;
+    private LiveData<List<Track>> mAllTracks;
     private ShootingRangeDb db;
 
 
@@ -27,6 +29,7 @@ public class ShootingRangeRepository {
         mAllWeapons = mWeaponDAO.getAlphabetizedWeaponsLive();
         mAllCalibers = mWeaponDAO.getAllCalibersLive();
         mAllReservations = mReservationDAO.getAllReservationsLive();
+        mAllTracks = mReservationDAO.getAllTracksLive();
     }
 
     public LiveData<List<Weapon>> getAllWeaponsLive() {
@@ -57,6 +60,20 @@ public class ShootingRangeRepository {
         }
         catch(Exception e){}
         return returnList;
+    }
+
+    public List<Track> getAllTracks() {
+        List<Track> returnList = null;
+        try {
+            returnList = new GetTracksAsyncTask().execute().get();
+        }
+        catch(Exception e){}
+        return returnList;
+    }
+
+
+    public LiveData<List<Track>> getAllTracksLive() {
+        return mAllTracks;
     }
 
 
@@ -104,6 +121,15 @@ public class ShootingRangeRepository {
         @Override
         protected List<Reservation> doInBackground(Void... url) {
             return db.reservationDAO().getAllReservations();
+        }
+    }
+
+
+    private class GetTracksAsyncTask extends AsyncTask<Void, Void,List<Track>>
+    {
+        @Override
+        protected List<Track> doInBackground(Void... url) {
+            return db.reservationDAO().getAllTracks();
         }
     }
 

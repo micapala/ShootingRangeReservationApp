@@ -22,12 +22,14 @@ import androidx.lifecycle.ViewModelProvider;
 import com.pz.ShootingRangeViewModel;
 import com.pz.activities.R;
 import com.pz.db.entities.Reservation;
-import com.pz.db.entities.Weapon;
+import com.pz.db.entities.Track;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReservationEditActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -37,6 +39,7 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
     private Spinner reservationLength;
     private Spinner hourOfReservation;
     private ShootingRangeViewModel mViewModel;
+    Map<Integer,List<Track>> avilableTracksAtTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +109,9 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
     private void refreshHoursOfReservation(){
         List<String> hoursList = new ArrayList<>();
         List<Reservation> allReservations;
+        List<Track> allTracks = mViewModel.getAllTracks();
+        List<Track> allTracksCopy = new ArrayList<>(allTracks);
+        avilableTracksAtTime = new HashMap<>();
         int numberOfHours = Integer.parseInt(reservationLength.getSelectedItem().toString());
 
         List<Reservation> reservationsOfDay = new ArrayList<>();
@@ -118,14 +124,28 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
 
         for(int hour =ShootingRangeViewModel.openingHour;hour<ShootingRangeViewModel.closeHour;hour++){
             boolean isValidHour = true;
+            int invalidIter = 0;
                 for (Reservation r : reservationsOfDay) {
                     if (hour < r.reservation_hour + r.number_of_Hours && hour + numberOfHours > r.reservation_hour){
-                        isValidHour = false;
-                        break;
+                        invalidIter++;
+                        for(Track t:allTracksCopy){
+                            if(t.track_id==r.fk_track_id) {
+                                allTracksCopy.remove(t);
+                                break;
+                            }
+                        }
+                        if(invalidIter==allTracks.size()){
+                            isValidHour = false;
+                            break;
+                        }
+
                     }
             }
-            if(isValidHour&&((hour+numberOfHours)<=ShootingRangeViewModel.closeHour))
+            if(isValidHour&&((hour+numberOfHours)<=ShootingRangeViewModel.closeHour)) {
                 hoursList.add(String.valueOf(hour));
+                avilableTracksAtTime.put(hour, allTracksCopy);
+                allTracksCopy = new ArrayList<>(allTracks);
+            }
         }
 
         if(hoursList.size()==0){
@@ -162,7 +182,7 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
                     long reservation_date = roundDateToMidnight(mCalendarView.getDate());
                     int reservationHour = Integer.parseInt(hourOfReservation.getSelectedItem().toString());
                     int reservationLength_t = Integer.parseInt(reservationLength.getSelectedItem().toString());
-                    Reservation new_reservation = new Reservation(customer_name, customer_surname, reservation_date, reservationHour, reservationLength_t);
+                    Reservation new_reservation = new Reservation(customer_name, customer_surname, reservation_date, reservationHour, reservationLength_t,avilableTracksAtTime.get(reservationHour).get(0).track_id);
                     mViewModel.insertReservation(new_reservation);
                     finish();
                 }else{

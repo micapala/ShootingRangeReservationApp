@@ -24,6 +24,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
         private final TextView reservationNameView;
         private final TextView reservationSurnameView;
         private final TextView reservationStartTimeView;
+        private final TextView reservationTrackId;
 
         private final TextView reservationEndTimeView;
        // private final TextView reservationNameView;
@@ -37,6 +38,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
             reservationSurnameView = itemView.findViewById(R.id.reservation_surname_field);
             reservationStartTimeView = itemView.findViewById(R.id.reservation_list_start_time);
             reservationEndTimeView = itemView.findViewById(R.id.reservation_list_end_time);
+            reservationTrackId = itemView.findViewById(R.id.reservation_list_track_id);
             itemView.setOnClickListener(this);
         }
 
@@ -71,8 +73,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
             holder.reservationSurnameView.setText(current.customer_surname);
             holder.reservationStartTimeView.setText(String.valueOf(current.reservation_hour));
             holder.reservationEndTimeView.setText(String.valueOf(current.reservation_hour+current.number_of_Hours));
-
-
+            holder.reservationTrackId.setText(String.valueOf(current.fk_track_id));
         }
     }
 

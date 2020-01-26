@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.pz.db.ShootingRangeRepository;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Reservation;
+import com.pz.db.entities.Track;
 import com.pz.db.entities.Weapon;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ShootingRangeViewModel extends AndroidViewModel {
     private LiveData<List<Weapon>> mAllWeapons;
     private LiveData<List<Caliber>> mAllCalibers;
     private LiveData<List<Reservation>> mAllReservations;
+    private LiveData<List<Track>> mAllTracks;
 
     public ShootingRangeViewModel(Application application) {
         super(application);
@@ -29,6 +31,7 @@ public class ShootingRangeViewModel extends AndroidViewModel {
         mAllWeapons = mRepository.getAllWeaponsLive();
         mAllCalibers = mRepository.getAllCalibersLive();
         mAllReservations = mRepository.getAllReservationsLive();
+        mAllTracks = mRepository.getAllTracksLive();
     }
 
     public LiveData<List<Weapon>> getAllWeaponsLive() {
@@ -54,6 +57,16 @@ public class ShootingRangeViewModel extends AndroidViewModel {
             mAllReservations = mRepository.getAllReservationsLive();
         }
         return mAllReservations;
+    }
+    public LiveData<List<Track>> getAllTracksLive(){
+        if(mAllTracks ==null){
+            mAllTracks = mRepository.getAllTracksLive();
+        }
+        return mAllTracks;
+    }
+
+    public List<Track> getAllTracks(){
+        return mRepository.getAllTracks();
     }
     public LiveData<List<Reservation>> getReservationsFromDay(long date) {
         return mRepository.getReservationsFromDay(date);

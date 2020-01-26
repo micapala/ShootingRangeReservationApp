@@ -39,6 +39,7 @@ public class ListWeaponsActivity extends AppCompatActivity implements WeaponClic
         adapter = new WeaponListAdapter(this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setNestedScrollingEnabled(false);
 
         mWeaponViewModel = new ViewModelProvider(this).get(ShootingRangeViewModel.class);
 
