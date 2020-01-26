@@ -10,12 +10,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Reservation;
+import com.pz.db.entities.Track;
 import com.pz.db.entities.Weapon;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Weapon.class,Caliber.class, Reservation.class}, version = 3, exportSchema = false)
+@Database(entities = {Weapon.class,Caliber.class, Reservation.class, Track.class}, version = 3, exportSchema = false)
 public abstract class ShootingRangeDb extends RoomDatabase {
     public abstract WeaponDAO weaponDAO();
 

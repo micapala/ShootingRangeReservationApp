@@ -77,7 +77,8 @@ public class ListReservationsActivity extends AppCompatActivity implements Reser
                         c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
                         setDateOnTop(c);
                     }
-                },day,month,year);
+                },year,month,day);
+
                 dpd.show();
             }
         });

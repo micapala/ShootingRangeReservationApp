@@ -8,16 +8,9 @@
     <TextView
         android:id="@+id/caliberName"
         style="@style/weapon_title"
-        android:layout_width="257dp"
+        android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:background="@color/buttonLabel" />
-
-    <Button
-        android:id="@+id/caliber_edit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Edytuj" />
 
     <Button
         android:id="@+id/caliber_delete_button"

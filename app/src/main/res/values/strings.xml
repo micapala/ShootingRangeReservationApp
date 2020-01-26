@@ -20,5 +20,8 @@
     <string name="reservation_numberOfHours">Liczba godzin</string>
     <string name="reservation_hour">Godzina rezerwacji</string>
     <string name="caliber_button_delete">Usuń kaliber</string>
-
+    <string name="caliber_add_hint">Nazwa kalibru</string>
+    <string name="caliber_add_cancel">Anuluj</string>
+    <string name="caliber_add_confirm">Dodaj</string>
+    <string name="caliber_add_title">Dodawanie nowego kalibru</string>
 </resources>

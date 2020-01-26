@@ -157,8 +157,8 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
         switch(v.getId()){
             case R.id.reservation_save_button:
                 if(!hourOfReservation.getSelectedItem().toString().equals("Brak dostępnych godzin.")) {
-                    String customer_name = customerName.toString();
-                    String customer_surname = customerSurname.toString();
+                    String customer_name = customerName.getText().toString();
+                    String customer_surname = customerSurname.getText().toString();
                     long reservation_date = roundDateToMidnight(mCalendarView.getDate());
                     int reservationHour = Integer.parseInt(hourOfReservation.getSelectedItem().toString());
                     int reservationLength_t = Integer.parseInt(reservationLength.getSelectedItem().toString());

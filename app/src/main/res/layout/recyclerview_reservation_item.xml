@@ -59,7 +59,7 @@
             android:text="Godzina startu" />
 
         <TextView
-            android:id="@+id/editText5"
+            android:id="@+id/reservation_list_end_time"
             android:layout_width="139dp"
             android:layout_height="32dp"
             android:ems="10"
