@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ import com.pz.ShootingRangeViewModel;
 import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Weapon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,7 +56,7 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAddItemDialog(ListCalibersActivity.this);
+                showAddCaliberDialog(ListCalibersActivity.this);
             }
         });
     }
@@ -66,12 +64,10 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
 
     @Override
     public void onCaliberClick(int viewId,int position,List<Caliber> caliberList) {
+        Caliber clickedCaliber = caliberList.get(position);
+        if(viewId == R.id.caliber_item_delete_button){
 
-        if(viewId == R.id.caliber_delete_button){
-            Caliber clickedCaliber = caliberList.get(position);
             List<Weapon> weaponsList = mViewModel.getAllWeapons();
-
-            Log.d("Masno fest",String.valueOf(weaponsList.size()));
             boolean isCaliberUsed = false;
             if(weaponsList.size()!=0){
                 for(Weapon w:weaponsList){
@@ -87,18 +83,21 @@ public class ListCalibersActivity extends AppCompatActivity implements CaliberCl
                 Toast.makeText(this, "Kaliber usunięty.", Toast.LENGTH_LONG).show();
             }
         }
+        else if(viewId == R.id.caliber_item_edit_button){
+            mViewModel.updateCaliber(clickedCaliber.caliberId,clickedCaliber.caliberName);
+        }
     }
 
-    private void showAddItemDialog(Context c) {
-        final EditText taskEditText = new EditText(c);
+    private void showAddCaliberDialog(Context c) {
+        final EditText caliberNameEditText = new EditText(c);
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle("Dodaj nowy kaliber")
-                .setView(taskEditText)
+                .setView(caliberNameEditText)
                 .setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Caliber c = new Caliber(taskEditText.getText().toString());
-                        mViewModel.insertCaliber(c);
+                        Caliber cal = new Caliber(caliberNameEditText.getText().toString());
+                        mViewModel.insertCaliber(cal);
 
                     }
                 })

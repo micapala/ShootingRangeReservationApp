@@ -38,8 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Imie" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/reservation_surname"
@@ -47,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Nazwisko"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

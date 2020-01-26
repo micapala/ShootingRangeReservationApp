@@ -66,32 +66,32 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
                 c.set(Calendar.SECOND, 0);
                 c.set(Calendar.MILLISECOND, 0);
                 mCalendarView.setDate(c.getTimeInMillis());
-                refreshHoursOfReservation();
+                refreshAvilableHours();
             }
         });
 
         reservationLength.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                refreshHoursOfReservation();
+                refreshAvilableHours();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                refreshHoursOfReservation();
+                refreshAvilableHours();
             }
         });
 
-        mViewModel.getAllReservationsLive().observe(this, new Observer<List<Reservation>>() {
+        mViewModel.getAllActiveReservationsLive().observe(this, new Observer<List<Reservation>>() {
             @Override
             public void onChanged(@Nullable final List<Reservation> reservations) {
-                refreshHoursOfReservation();
+                refreshAvilableHours();
             }
         });
 
         saveReservation.setOnClickListener(this);
 
         populateReservationLengthSpinner();
-        refreshHoursOfReservation();
+        refreshAvilableHours();
     }
 
     private void populateReservationLengthSpinner(){
@@ -106,7 +106,7 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
 
     }
 
-    private void refreshHoursOfReservation(){
+    private void refreshAvilableHours(){
         List<String> hoursList = new ArrayList<>();
         List<Reservation> allReservations;
         List<Track> allTracks = mViewModel.getAllTracks();
@@ -115,7 +115,7 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
         int numberOfHours = Integer.parseInt(reservationLength.getSelectedItem().toString());
 
         List<Reservation> reservationsOfDay = new ArrayList<>();
-        allReservations = mViewModel.getAllReservations();
+        allReservations = mViewModel.getAllActiveReservations();
         if(allReservations!=null){
             for(Reservation r:allReservations){
                 if(r.reservation_date==roundDateToMidnight(mCalendarView.getDate())) reservationsOfDay.add(r);
@@ -138,21 +138,22 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
                             isValidHour = false;
                             break;
                         }
-
                     }
             }
             if(isValidHour&&((hour+numberOfHours)<=ShootingRangeViewModel.closeHour)) {
                 hoursList.add(String.valueOf(hour));
                 avilableTracksAtTime.put(hour, allTracksCopy);
-                allTracksCopy = new ArrayList<>(allTracks);
             }
+            allTracksCopy = new ArrayList<>(allTracks);
         }
 
         if(hoursList.size()==0){
             hoursList.add("Brak dostępnych godzin.");
             hourOfReservation.setClickable(false);
+           // hourOfReservation.setVisibility(View.INVISIBLE);
         }else{
             hourOfReservation.setClickable(true);
+           // hourOfReservation.setVisibility(View.VISIBLE);
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, hoursList);
@@ -190,7 +191,7 @@ public class ReservationEditActivity extends AppCompatActivity implements View.O
                 }
                 break;
             case R.id.reservationLength:
-                refreshHoursOfReservation();
+                refreshAvilableHours();
                 break;
         }
 

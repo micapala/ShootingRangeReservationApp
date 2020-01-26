@@ -62,4 +62,7 @@ public interface WeaponDAO {
             "WHERE weapon_id = :weapon_id")
     void updateWeapon(int weapon_id,byte[] weapon_image,String weaponModel,int fk_caliber_id,double priceForShoot);
 
+    @Query("UPDATE caliber_t SET caliber_name = :caliber_name where caliber_id = :caliber_id")
+    void updateCaliber(int caliber_id,String caliber_name);
+
 }

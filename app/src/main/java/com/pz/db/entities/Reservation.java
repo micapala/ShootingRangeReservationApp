@@ -31,6 +31,8 @@ public class Reservation {
 
     public int number_of_Hours;
 
+    public boolean is_active;
+
     public Reservation(String customer_name,String customer_surname,long reservation_date,int reservation_hour,int number_of_Hours,int fk_track_id){
         this.customer_name = customer_name;
         this.customer_surname = customer_surname;
@@ -38,6 +40,7 @@ public class Reservation {
         this.reservation_hour = reservation_hour;
         this.number_of_Hours = number_of_Hours;
         this.fk_track_id = fk_track_id;
+        this.is_active = true;
     }
 
 

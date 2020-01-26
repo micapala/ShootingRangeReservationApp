@@ -13,7 +13,10 @@ public class Track {
 
     public int track_length;
 
-    public Track(int track_length){
+    public String track_name;
+
+    public Track(String track_name,int track_length){
         this.track_length = track_length;
+        this.track_name = track_name;
     }
 }

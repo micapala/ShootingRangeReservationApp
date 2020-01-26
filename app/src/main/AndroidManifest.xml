@@ -8,11 +8,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.pz.activities.weapon.WeaponEditActivity"></activity>
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name="com.pz.activities.weapon.WeaponEditActivity"
+            android:theme = "@style/AppTheme.NoActionBar"></activity>
         <activity android:name="com.pz.activities.weapon.ListWeaponsActivity"></activity>
         <activity android:name="com.pz.activities.caliber.ListCalibersActivity"></activity>
         <activity android:name="com.pz.activities.reservation.ListReservationsActivity"></activity>
+        <activity android:name="com.pz.activities.track.ListTracksActivity"></activity>
         <activity android:name="com.pz.activities.reservation.ReservationEditActivity"
             android:theme = "@style/AppTheme.NoActionBar"></activity>
         <activity

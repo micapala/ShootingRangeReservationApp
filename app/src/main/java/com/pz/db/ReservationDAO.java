@@ -18,14 +18,17 @@ public interface ReservationDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertReservation(Reservation reservation);
 
-    @Query("SELECT * from reservation_t")
-    LiveData<List<Reservation>> getAllReservationsLive();
+    @Query("SELECT * from reservation_t where is_active = 1")
+    LiveData<List<Reservation>> getAllActiveReservationsLive();
 
-    @Query("SELECT * from reservation_t")
-    List<Reservation> getAllReservations();
+    @Query("SELECT * from reservation_t where is_active = 1")
+    List<Reservation> getAllActiveReservations();
 
-    @Query("SELECT * from reservation_t where reservation_date = :date order by reservation_date")
+    @Query("SELECT * from reservation_t where reservation_date = :date and is_active = 1 order by reservation_hour")
     LiveData<List<Reservation>> getReservationsFromDay(long date);
+
+    @Query("UPDATE reservation_t set is_active = 0 where reservation_id =:reservation_id")
+    void cancelReservation(int reservation_id);
 
     @Query("DELETE FROM reservation_t")
     void deleteAllReservations();
@@ -41,4 +44,8 @@ public interface ReservationDAO {
 
     @Query("DELETE FROM track_t")
     void deleteAllTracks();
+
+    @Query("UPDATE track_t SET track_name = :track_name , track_length = :track_length where track_id =:track_id")
+    void updateTrack(int track_id,String track_name,int track_length);
+
 }

@@ -66,8 +66,8 @@ public abstract class ShootingRangeDb extends RoomDatabase {
                 Caliber cal8 = new Caliber(".44 MAGNUM");
                 Caliber cal9 = new Caliber("7,62");
 
-                Track t1 = new Track(100);
-                Track t2 = new Track(99);
+                Track t1 = new Track("1",100);
+                Track t2 = new Track("2",99);
                 reservationDAO.insertTrack(t1);
                 reservationDAO.insertTrack(t2);
 

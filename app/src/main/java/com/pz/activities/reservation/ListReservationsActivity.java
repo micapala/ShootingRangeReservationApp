@@ -19,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pz.ShootingRangeViewModel;
 import com.pz.activities.R;
 import com.pz.db.entities.Reservation;
+import com.pz.db.entities.Track;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,20 +46,25 @@ public class ListReservationsActivity extends AppCompatActivity implements Reser
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_reservations);
-        selectedDateView = findViewById(R.id.reservations_list_date);
-        setDateButon = findViewById(R.id.reservation_set_date);
+        selectedDateView = findViewById(R.id.reservations_list_selected_date);
+        setDateButon = findViewById(R.id.reservations_list_set_date_button);
 
         mViewModel = new ViewModelProvider(this).get(ShootingRangeViewModel.class);
         RecyclerView recyclerView = findViewById(R.id.reservations_recyclerview);
 
         setDateOnTop(Calendar.getInstance());
 
-
-
         adapter = new ReservationListAdapter(this, this);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mViewModel.getAllTracksLive().observe(this, new Observer<List<Track>>() {
+            @Override
+            public void onChanged(List<Track> tracks) {
+                adapter.setTracks(tracks);
+            }
+        });
 
         setDateButon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +90,7 @@ public class ListReservationsActivity extends AppCompatActivity implements Reser
         });
         updateObserver();
 
-        FloatingActionButton fab = findViewById(R.id.add_reservation_button);
+        FloatingActionButton fab = findViewById(R.id.reservation_list_add_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,19 +103,21 @@ public class ListReservationsActivity extends AppCompatActivity implements Reser
 
     private void updateObserver(){
         if(reservationEntries!=null)
-            mViewModel.getReservationsFromDay(selectedReservationDate.getTime()).removeObserver(reservationEntries);
+            mViewModel.getActiveReservationsFromDay(selectedReservationDate.getTime()).removeObserver(reservationEntries);
         reservationEntries = new Observer<List<Reservation>>() {
-            private int x;
             @Override
             public void onChanged(@Nullable List<Reservation> reservations) {
                 adapter.setReservations(reservations);
             }
         };
-        mViewModel.getReservationsFromDay(selectedReservationDate.getTime()).observeForever(reservationEntries);
+        mViewModel.getActiveReservationsFromDay(selectedReservationDate.getTime()).observeForever(reservationEntries);
 
     }
     @Override
-    public void onReservationClick(int position) {
+    public void onReservationClick(int viewId,int reservation_id) {
+        if(viewId == R.id.reservation_item_cancel_button){
+            mViewModel.cancelReservation(reservation_id);
+        }
 
     }
 

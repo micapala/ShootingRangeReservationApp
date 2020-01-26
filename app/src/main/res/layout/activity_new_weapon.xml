@@ -7,120 +7,135 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView4"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:gravity="center"
-        android:text="@string/add_weapon_title"
-        android:visibility="visible"
-        app:autoSizeTextType="uniform" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:adjustViewBounds="true"
-            android:maxWidth="50dip"
-            android:maxHeight="50dip"
-            android:scaleType="fitCenter"
-            tools:srcCompat="@tools:sample/avatars" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/add_image_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dodaj logo" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/weapon_name_hint" />
-
-    <EditText
-        android:id="@+id/edit_weapon_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/big_padding"
-        android:layout_marginBottom="@dimen/big_padding"
-        android:fontFamily="sans-serif-light"
-        android:inputType="textAutoComplete"
-        android:padding="@dimen/small_padding"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="245dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="203dp"
-                android:layout_height="wrap_content"
-                android:text="Kaliber" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="266dp"
-                android:layout_height="wrap_content"
-                android:text="Cena za strzał" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/select_caliber"
-                android:layout_width="201dp"
-                android:layout_height="45dp"
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:gravity="center"
+                android:text="@string/add_weapon_title"
                 android:visibility="visible"
-                tools:visibility="visible" />
+                app:autoSizeTextType="uniform" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="83dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="83dp"
+                    android:adjustViewBounds="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:maxWidth="50dip"
+                    android:maxHeight="50dip"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/avatars"
+                    tools:visibility="invisible" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/add_image_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dodaj logo" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/weapon_name_hint" />
 
             <EditText
-                android:id="@+id/edit_price_for_shoot"
-                android:layout_width="189dp"
+                android:id="@+id/edit_weapon_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:layout_marginTop="@dimen/big_padding"
+                android:layout_marginBottom="@dimen/big_padding"
+                android:fontFamily="sans-serif-light"
+                android:inputType="textAutoComplete"
+                android:padding="@dimen/small_padding"
+                android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="245dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="203dp"
+                        android:layout_height="wrap_content"
+                        android:text="Kaliber" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="266dp"
+                        android:layout_height="wrap_content"
+                        android:text="Cena za strzał" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/select_caliber"
+                        android:layout_width="201dp"
+                        android:layout_height="45dp"
+                        android:visibility="visible"
+                        tools:visibility="visible" />
+
+                    <EditText
+                        android:id="@+id/edit_price_for_shoot"
+                        android:layout_width="189dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="zł" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/delete_weapon_button"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="zł" />
+                android:text="@string/button_delete_weapon"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/button_save"
+                android:textColor="@color/buttonLabel" />
+
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/delete_weapon_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_delete_weapon"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/button_save"
-        android:textColor="@color/buttonLabel" />
 
 </LinearLayout>

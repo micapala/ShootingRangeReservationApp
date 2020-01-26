@@ -1,15 +1,14 @@
 package com.pz.activities.reservation;
 
 import com.pz.activities.R;
-import com.pz.db.entities.Caliber;
 import com.pz.db.entities.Reservation;
-import com.pz.db.entities.Weapon;
+import com.pz.db.entities.Track;
+
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,28 +23,31 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
         private final TextView reservationNameView;
         private final TextView reservationSurnameView;
         private final TextView reservationStartTimeView;
-        private final TextView reservationTrackId;
-
+        private final TextView reservationTrackIdView;
         private final TextView reservationEndTimeView;
-       // private final TextView reservationNameView;
-        //private final TextView reservationNameView;
+
+        private final Button reservationCancelButton;
+
         private ReservationClickListener listener;
 
         private ReservationViewHolder(View itemView, ReservationClickListener listener)  {
             super(itemView);
             this.listener = listener;
-            reservationNameView = itemView.findViewById(R.id.reservation_name_field);
-            reservationSurnameView = itemView.findViewById(R.id.reservation_surname_field);
-            reservationStartTimeView = itemView.findViewById(R.id.reservation_list_start_time);
-            reservationEndTimeView = itemView.findViewById(R.id.reservation_list_end_time);
-            reservationTrackId = itemView.findViewById(R.id.reservation_list_track_id);
+            reservationNameView = itemView.findViewById(R.id.reservation_item_name_text);
+            reservationSurnameView = itemView.findViewById(R.id.reservation_item_surname_text);
+            reservationStartTimeView = itemView.findViewById(R.id.reservation_item_start_text);
+            reservationEndTimeView = itemView.findViewById(R.id.reservation_item_end_text);
+            reservationTrackIdView = itemView.findViewById(R.id.reservation_item_track_id_text);
+            reservationCancelButton = itemView.findViewById(R.id.reservation_item_cancel_button);
+            reservationCancelButton.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (listener != null) {
-                listener.onReservationClick(getAdapterPosition());
+                Reservation clickedReservation = mReservations.get(getAdapterPosition());
+                listener.onReservationClick(v.getId(),clickedReservation.reservation_id);
             }
         }
     }
@@ -53,6 +55,7 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
 
     private final LayoutInflater mInflater;
     private List<Reservation> mReservations;
+    private List<Track> mTracks;
 
     public ReservationListAdapter(Context context,ReservationClickListener listener) {
         this.mInflater = LayoutInflater.from(context);
@@ -69,17 +72,27 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
     public void onBindViewHolder(ReservationViewHolder holder, int position) {
         if (mReservations != null) {
             Reservation current = mReservations.get(position);
-            holder.reservationNameView.setText(current.customer_name);
-            holder.reservationSurnameView.setText(current.customer_surname);
-            holder.reservationStartTimeView.setText(String.valueOf(current.reservation_hour));
-            holder.reservationEndTimeView.setText(String.valueOf(current.reservation_hour+current.number_of_Hours));
-            holder.reservationTrackId.setText(String.valueOf(current.fk_track_id));
+            if(current.is_active) {
+                holder.reservationNameView.setText(current.customer_name);
+                holder.reservationSurnameView.setText(current.customer_surname);
+                holder.reservationStartTimeView.setText(String.valueOf(current.reservation_hour));
+                holder.reservationEndTimeView.setText(String.valueOf(current.reservation_hour + current.number_of_Hours));
+                for (Track t : mTracks) {
+                    if (t.track_id == current.fk_track_id) {
+                        holder.reservationTrackIdView.setText(t.track_name);
+                        break;
+                    }
+                }
+            }
         }
     }
 
     void setReservations(List<Reservation> reservations){
         mReservations = reservations;
         notifyDataSetChanged();
+    }
+    void setTracks(List<Track> tracks){
+        mTracks = tracks;
     }
 
     @Override

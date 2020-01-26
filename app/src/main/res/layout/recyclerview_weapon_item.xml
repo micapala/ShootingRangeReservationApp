@@ -34,7 +34,6 @@
             style="@style/weapon_title"
             android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:background="#F5F4F4"
 
             android:gravity="center_horizontal|center_vertical" />
 

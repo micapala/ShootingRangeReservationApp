@@ -17,7 +17,7 @@ public class ShootingRangeRepository {
     private ReservationDAO mReservationDAO;
     private LiveData<List<Weapon>> mAllWeapons;
     private LiveData<List<Caliber>> mAllCalibers;
-    private LiveData<List<Reservation>> mAllReservations;
+    private LiveData<List<Reservation>> mAllActiveReservations;
     private LiveData<List<Track>> mAllTracks;
     private ShootingRangeDb db;
 
@@ -28,7 +28,7 @@ public class ShootingRangeRepository {
         mReservationDAO = db.reservationDAO();
         mAllWeapons = mWeaponDAO.getAlphabetizedWeaponsLive();
         mAllCalibers = mWeaponDAO.getAllCalibersLive();
-        mAllReservations = mReservationDAO.getAllReservationsLive();
+        mAllActiveReservations = mReservationDAO.getAllActiveReservationsLive();
         mAllTracks = mReservationDAO.getAllTracksLive();
     }
 
@@ -47,13 +47,13 @@ public class ShootingRangeRepository {
     public LiveData<List<Caliber>> getAllCalibersLive() {
         return mAllCalibers;
     }
-    public LiveData<List<Reservation>> getAllReservationsLive() {
-        return mAllReservations;
+    public LiveData<List<Reservation>> getAllActiveReservationsLive() {
+        return mAllActiveReservations;
     }
-    public LiveData<List<Reservation>> getReservationsFromDay(long date) {
+    public LiveData<List<Reservation>> getActiveReservationsFromDay(long date) {
         return mReservationDAO.getReservationsFromDay(date);
     }
-    public List<Reservation> getAllReservations() {
+    public List<Reservation> getAllActiveReservations() {
         List<Reservation> returnList = null;
         try {
             returnList = new GetReservationsAsyncTask().execute().get();
@@ -76,6 +76,12 @@ public class ShootingRangeRepository {
         return mAllTracks;
     }
 
+    public void cancelReservation(int reservation_id){
+        ShootingRangeDb.databaseWriteExecutor.execute(() -> {
+            mReservationDAO.cancelReservation(reservation_id);
+        });
+    }
+
 
     public void insertWeapon(Weapon word) {
         ShootingRangeDb.databaseWriteExecutor.execute(() -> {
@@ -90,6 +96,11 @@ public class ShootingRangeRepository {
     public void insertReservation(Reservation reservation) {
         ShootingRangeDb.databaseWriteExecutor.execute(() -> {
             mReservationDAO.insertReservation(reservation);
+        });
+    }
+    public void insertTrack(Track t){
+        ShootingRangeDb.databaseWriteExecutor.execute(() -> {
+            mReservationDAO.insertTrack(t);
         });
     }
     public void deleteWeapon(int weapon_id){
@@ -107,6 +118,18 @@ public class ShootingRangeRepository {
             mWeaponDAO.updateWeapon(weapon_id,weapon_image,weaponModel,fk_caliber_id,priceForShoot);
         });
     }
+    public void updateCaliber(int caliber_id,String caliber_name){
+        ShootingRangeDb.databaseWriteExecutor.execute(() -> {
+                mWeaponDAO.updateCaliber(caliber_id,caliber_name);
+
+        });
+    }
+    public void updateTrack(int track_id,String track_name,int track_length){
+        ShootingRangeDb.databaseWriteExecutor.execute(() -> {
+            mReservationDAO.updateTrack(track_id,track_name,track_length);
+
+        });
+    }
 
     private class GetWeaponsAlphabetizedAsyncTask extends AsyncTask<Void, Void,List<Weapon>>
     {
@@ -120,7 +143,7 @@ public class ShootingRangeRepository {
     {
         @Override
         protected List<Reservation> doInBackground(Void... url) {
-            return db.reservationDAO().getAllReservations();
+            return db.reservationDAO().getAllActiveReservations();
         }
     }
 

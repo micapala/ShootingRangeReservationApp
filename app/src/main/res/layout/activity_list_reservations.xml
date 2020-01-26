@@ -22,19 +22,25 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/reservations_list_date"
-                android:layout_width="293dp"
+                android:id="@+id/textView18"
+                android:layout_width="82dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/reservation_list_date_hint" />
+
+            <TextView
+                android:id="@+id/reservations_list_selected_date"
+                android:layout_width="142dp"
                 android:layout_height="45dp"
                 android:gravity="center_horizontal"
-                android:text="TextView"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/reservation_set_date"
+                android:id="@+id/reservations_list_set_date_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Wybierz date" />
+                android:text="@string/reservation_list_date_button_hint" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -46,7 +52,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_reservation_button"
+        android:id="@+id/reservation_list_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

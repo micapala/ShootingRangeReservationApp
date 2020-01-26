@@ -4,20 +4,26 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/weapons_menu_button"
+        android:id="@+id/main_menu_weapons_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/main_menu_weapons" />
 
     <Button
-        android:id="@+id/reservations_menu_button"
+        android:id="@+id/main_menu_reservations_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/main_menu_reservations" />
 
     <Button
-        android:id="@+id/calibers_menu_button"
+        android:id="@+id/main_menu_calibers_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/main_menu_calibers" />
+
+    <Button
+        android:id="@+id/main_menu_tracks_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_menu_tracks" />
 </LinearLayout>

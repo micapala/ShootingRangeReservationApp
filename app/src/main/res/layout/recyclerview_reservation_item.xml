@@ -11,57 +11,32 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/reservation_name_field"
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reservation_item_name_hint" />
+
+        <TextView
+            android:id="@+id/reservation_item_name_text"
             android:layout_width="142dp"
             android:layout_height="33dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Imie" />
+            android:gravity="center" />
 
         <TextView
-            android:id="@+id/reservation_surname_field"
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/reservation_item_surname_hint" />
+
+        <TextView
+            android:id="@+id/reservation_item_surname_text"
             android:layout_width="141dp"
             android:layout_height="34dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Nazwisko" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/reservation_date_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center|center_vertical"
-            android:inputType="textPersonName"
-            android:text="Data " />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/reservation_list_track_hint" />
-
-            <TextView
-                android:id="@+id/reservation_list_track_id"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
+            android:gravity="center" />
 
     </LinearLayout>
 
@@ -71,22 +46,64 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/reservation_list_start_time"
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reservation_item_start_hint" />
+
+        <TextView
+            android:id="@+id/reservation_item_start_text"
             android:layout_width="match_parent"
             android:layout_height="34dp"
             android:ems="10"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:text="Godzina startu" />
+            android:gravity="center" />
 
         <TextView
-            android:id="@+id/reservation_list_end_time"
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reservation_item_end_hint" />
+
+        <TextView
+            android:id="@+id/reservation_item_end_text"
             android:layout_width="139dp"
             android:layout_height="32dp"
             android:ems="10"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:text="Godzina końca" />
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/reservation_item_track_hint" />
+
+            <TextView
+                android:id="@+id/reservation_item_track_id_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/reservation_item_cancel_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reservation_item_cancel_button_hint" />
+
     </LinearLayout>
 
 </LinearLayout>
